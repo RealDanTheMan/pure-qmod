@@ -27,11 +27,11 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 // A user mod should never modify this file
 
 #ifdef STANDALONE
-  #define PRODUCT_NAME				"iofoo3"
-  #define BASEGAME					"foobar"
-  #define CLIENT_WINDOW_TITLE		"changeme"
-  #define CLIENT_WINDOW_MIN_TITLE	"changeme2"
-  #define HOMEPATH_NAME_UNIX		".foo"
+  #define PRODUCT_NAME				"pure-qmod"
+  #define BASEGAME					"pure-qmod"
+  #define CLIENT_WINDOW_TITLE		"Pure Quake3 Mod"
+  #define CLIENT_WINDOW_MIN_TITLE	"Pure Quake3 Mod"
+  #define HOMEPATH_NAME_UNIX		".pure-qmod"
   #define HOMEPATH_NAME_WIN			"FooBar"
   #define HOMEPATH_NAME_MACOSX		HOMEPATH_NAME_WIN
 //  #define STEAMPATH_NAME			"Foo Bar"
