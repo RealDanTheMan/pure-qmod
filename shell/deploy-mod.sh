@@ -19,6 +19,9 @@ echo ""
 
 SRC_CONFIGS="$CWD/mod_data/configs"
 
+echo "Deploying mod description"
+cp "$SRC_CONFIGS/description.txt" "$BUILD_PATH/description.txt"
+
 echo "Deploying default config"
 cp "$SRC_CONFIGS/default.cfg" "$BUILD_PATH/default.cfg"
 
