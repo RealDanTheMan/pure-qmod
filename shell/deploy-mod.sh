@@ -3,16 +3,21 @@
 echo "Generating PAK file"
 echo ""
 
-BUILD_PATH="./build/release-linux-x86_64/pure-qmod"
-PAK_SRC="./mod_data/pak"
+CWD=$(pwd)
+
+BUILD_PATH="$CWD/build/release-linux-x86_64/pure-qmod"
+PAK_SRC="$CWD/mod_data/pak"
 PAK_DST="$BUILD_PATH/pak0.pk3"
-zip -r "$PAK_DST" "$PAK_SRC/"
+rm $PAK_DST
+cd $PAK_SRC
+zip -r "$PAK_DST" .
+cd $CWD
 
 echo "Done"
 echo ""
 
 
-SRC_CONFIGS="./mod_data/configs"
+SRC_CONFIGS="$CWD/mod_data/configs"
 
 echo "Deploying default config"
 cp "$SRC_CONFIGS/default.cfg" "$BUILD_PATH/default.cfg"
