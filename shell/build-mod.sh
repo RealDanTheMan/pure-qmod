@@ -1,4 +1,4 @@
 #!/bin/bash
 
 
-make BASEGAME="pure-qmod" BUILD_STANDALONE=1 BUILD_QVM=1 BUILD_BASEGAME=1
+make -j$(nproc-1) BASEGAME="pure-qmod" BUILD_STANDALONE=1
