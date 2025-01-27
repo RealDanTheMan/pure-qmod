@@ -1,3 +1,4 @@
 #!/bin/bash
 
-make CFLAGS="-DSTANDALONE"
+
+make BASEGAME="pure-qmod" BUILD_STANDALONE=1 BUILD_QVM=1 BUILD_BASEGAME=1

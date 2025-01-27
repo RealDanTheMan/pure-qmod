@@ -132,7 +132,7 @@ SERVERBIN=ioq3ded
 endif
 
 ifndef BASEGAME
-BASEGAME=pure-qmod
+BASEGAME=baseq3
 endif
 
 ifndef BASEGAME_CFLAGS
