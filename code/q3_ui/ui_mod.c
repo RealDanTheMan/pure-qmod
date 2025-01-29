@@ -1,0 +1,83 @@
+#include "ui_mod.h"
+
+typedef struct {
+	menuframework_s menu;
+
+	menutext_s		startgame;
+	menutext_s		exitgame;
+} modmainmenu_t;
+
+static modmainmenu_t s_modmain;
+
+
+void Mod_Main_MenuEvent (void* ptr, int event) {
+	if( event != QM_ACTIVATED ) {
+		return;
+	}
+
+	switch( ((menucommon_s*)ptr)->id ) {
+	case ID_MOD_BEGIN:
+		// TODO: Load startup map
+		break;
+
+	case ID_MOD_EXIT:
+		// TODO: Exit game
+		//UI_ConfirmMenu( "EXIT GAME?", 0, MainMenu_ExitAction );
+		break;
+	}
+}
+
+static void UI_ModMainMenuDraw( void ) {
+	vec4_t color = {0.5, 0, 0, 1};
+	Menu_Draw( &s_modmain.menu );
+
+	UI_DrawString(
+		320,
+		450,
+		"Ironstock(c) 2025, Mihai & Dan, Inc.  All Rights Reserved",
+		UI_CENTER|UI_SMALLFONT,
+		color
+	);
+}
+
+void UI_ModMainMenu(void) {
+
+	int y = 134;
+	int	style = UI_CENTER | UI_DROPSHADOW;
+
+	trap_Cvar_Set( "sv_killserver", "1" );
+	memset(&s_modmain, 0, sizeof(modmainmenu_t));
+
+	s_modmain.menu.draw = UI_ModMainMenuDraw;
+	s_modmain.menu.fullscreen = qtrue;
+	s_modmain.menu.wrapAround = qtrue;
+	s_modmain.menu.showlogo = qfalse;
+
+	s_modmain.startgame.generic.type		= MTYPE_PTEXT;
+	s_modmain.startgame.generic.flags		= QMF_CENTER_JUSTIFY|QMF_PULSEIFFOCUS;
+	s_modmain.startgame.generic.x			= 320;
+	s_modmain.startgame.generic.y			= y;
+	s_modmain.startgame.generic.id			= ID_MOD_BEGIN;
+	s_modmain.startgame.generic.callback	= Mod_Main_MenuEvent; 
+	s_modmain.startgame.string				= "Begin Game";
+	s_modmain.startgame.color				= color_white;
+	s_modmain.startgame.style				= style;
+
+	y += MOD_MAIN_MENU_SPACING;
+	s_modmain.exitgame.generic.type			= MTYPE_PTEXT;
+	s_modmain.exitgame.generic.flags		= QMF_CENTER_JUSTIFY|QMF_PULSEIFFOCUS;
+	s_modmain.exitgame.generic.x			= 320;
+	s_modmain.exitgame.generic.y			= y;
+	s_modmain.exitgame.generic.id			= ID_MOD_EXIT;
+	s_modmain.exitgame.generic.callback		= Mod_Main_MenuEvent; 
+	s_modmain.exitgame.string				= "Exit";
+	s_modmain.exitgame.color				= color_red;
+	s_modmain.exitgame.style				= style;
+
+	Menu_AddItem(&s_modmain.menu, &s_modmain.startgame);
+	Menu_AddItem(&s_modmain.menu, &s_modmain.exitgame);
+
+	trap_Key_SetCatcher(KEYCATCH_UI);
+	uis.menusp = 0;
+	UI_PushMenu(&s_modmain.menu);
+}
