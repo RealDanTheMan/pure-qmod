@@ -815,7 +815,11 @@ void UI_SetActiveMenu( uiMenuCommand_t menu ) {
 		UI_ForceMenuOff();
 		return;
 	case UIMENU_MAIN:
-		UI_MainMenu();
+		#if UI_USE_MOD_MAIN_MENU == 1
+			UI_ModMainMenu();
+		#else
+			UI_MainMenu();
+		#endif
 		return;
 	case UIMENU_NEED_CD:
 		UI_ConfirmMenu( "Insert the CD", 0, NeedCDAction );
