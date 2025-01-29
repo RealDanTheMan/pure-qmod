@@ -35,7 +35,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 // Choose if we boot into standard Q3 main menu or custom mod menu instead.
 // 0 == Q3 main menu, 1 == Custom mod main menu.
-#define UI_USE_MOD_MAIN_MENU 0
+#define UI_USE_MOD_MAIN_MENU 1
 
 typedef void (*voidfunc_f)(void);
 
