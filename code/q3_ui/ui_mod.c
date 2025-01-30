@@ -15,13 +15,14 @@ static modmainmenu_t s_modmain;
 ///
 /// UI_ModLoadMap
 /// Loads default mod test map.
-void UI_ModLoadMap(void) {
+void UI_ModLoadMap(const char* map_name) {
 	Com_Printf( "Loading standalone mod map\n" );
+
 	trap_Cvar_SetValue("sv_pure", 0);
 	trap_Cvar_SetValue("bot_enable", 0);
 	trap_Cvar_SetValue("g_gametype", 0);
 
-	trap_Cmd_ExecuteText( EXEC_APPEND, va( "wait ; wait ; map helloquake; wait; \n"));
+	trap_Cmd_ExecuteText( EXEC_APPEND, va( "wait ; wait ; map %s; wait; \n", map_name));
 }
 
 ///
@@ -34,7 +35,7 @@ void Mod_Main_MenuEvent (void* ptr, int event) {
 
 	switch( ((menucommon_s*)ptr)->id ) {
 	case ID_MOD_BEGIN:
-		UI_ModLoadMap();
+		UI_ModLoadMap("helloquake");
 		break;
 
 	case ID_MOD_EXIT:
