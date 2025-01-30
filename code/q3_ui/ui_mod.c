@@ -1,5 +1,8 @@
 #include "ui_mod.h"
 
+///
+/// modmainmenu_t
+/// Represents mod custom main menu object.
 typedef struct {
 	menuframework_s menu;
 
@@ -9,7 +12,21 @@ typedef struct {
 
 static modmainmenu_t s_modmain;
 
+///
+/// UI_ModLoadMap
+/// Loads default mod test map.
+void UI_ModLoadMap(void) {
+	Com_Printf( "Loading standalone mod map\n" );
+	trap_Cvar_SetValue("sv_pure", 0);
+	trap_Cvar_SetValue("bot_enable", 0);
+	trap_Cvar_SetValue("g_gametype", 0);
 
+	trap_Cmd_ExecuteText( EXEC_APPEND, va( "wait ; wait ; map helloquake; wait; \n"));
+}
+
+///
+/// Mod_Main_MenuEvent
+/// Handle custom mod main menu events.
 void Mod_Main_MenuEvent (void* ptr, int event) {
 	if( event != QM_ACTIVATED ) {
 		return;
@@ -17,7 +34,7 @@ void Mod_Main_MenuEvent (void* ptr, int event) {
 
 	switch( ((menucommon_s*)ptr)->id ) {
 	case ID_MOD_BEGIN:
-		// TODO: Load startup map
+		UI_ModLoadMap();
 		break;
 
 	case ID_MOD_EXIT:
@@ -27,6 +44,9 @@ void Mod_Main_MenuEvent (void* ptr, int event) {
 	}
 }
 
+/// 
+/// UI_ModMainMenuDraw
+/// Draws custom mod main menu.
 static void UI_ModMainMenuDraw( void ) {
 	vec4_t color = {0.5, 0, 0, 1};
 	Menu_Draw( &s_modmain.menu );
@@ -40,6 +60,9 @@ static void UI_ModMainMenuDraw( void ) {
 	);
 }
 
+///
+/// UI_ModMainMenu
+/// Constructs custom mod main menu.
 void UI_ModMainMenu(void) {
 
 	int y = 134;
