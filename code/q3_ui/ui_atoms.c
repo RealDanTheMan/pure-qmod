@@ -815,10 +815,10 @@ void UI_SetActiveMenu( uiMenuCommand_t menu ) {
 		UI_ForceMenuOff();
 		return;
 	case UIMENU_MAIN:
-		#if UI_USE_MOD_MAIN_MENU == 1
-			UI_ModMainMenu();
+		#ifdef PURE_QMOD
+		UI_ModMainMenu();
 		#else
-			UI_MainMenu();
+		UI_MainMenu();
 		#endif
 		return;
 	case UIMENU_NEED_CD:
